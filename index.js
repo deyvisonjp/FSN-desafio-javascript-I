@@ -1,9 +1,11 @@
 // Base a ser utilizada
 const alunosDaEscola = [{
         nome: "Henrique",
-        notas: [],
-        cursos: [],
-        faltas: 5
+        notas: [5, 7, 7, 9],
+        cursos: [{
+            nomeDoCurso: "Full Stack"
+        }],
+        faltas: 4
     },
     {
         nome: "Edson",
@@ -130,21 +132,49 @@ function aplicarNota(aluno) {
     let resposta = pesquisa(aluno);
     if (resposta.length >= 1) {
         if (aluno.cursos.length >= 1) {
-            aluno.notas.push(notas = 7);
-            return " Sistema de notas\n" + 
-            "O aluno recebeu a seguinte nota " + "7";
+            aluno.notas.push(notas = 1);
+            return " Sistema de notas\n" +
+                "O aluno recebeu a seguinte nota " + "7";
         } else {
             return "O aluno não esta matriculado em nenhum curso";
-        } 
+        }
     } else {
         return "Este Aluno não esta cadastrado no sistema"
+    }
+}
+
+/*Funcao Aprovar Aluno
+=================================================================================*/
+function aprovarAluno(aluno) {
+    let resposta = pesquisa(aluno);
+    let media = 0;
+    if ((resposta.length >= 1) && (aluno.cursos.length >= 1)) {
+        let somanota = 0;
+        aluno.notas.forEach(nota => {
+            somanota += nota;
+        })
+        media = (somanota / aluno.notas.length);
+    } else if (aluno.cursos.length < 1) {
+        return "Este Aluno não esta matriculado em nenhuma matéria";
+    } else {
+        return "Este Aluno não esta cadastrado no sistema"
+    }
+
+    //Retorna o resulta dependendo da média
+    console.log(".:.:.: Sistema de Aprovação :.:.:.");
+    if ((media >= 7) && (aluno.faltas <= 3)) {
+        return "O Aluno " + aluno.nome + " foi Aprovado com média " + media.toFixed(2);
+    } else if (media < 7) {
+        return "O Aluno " + aluno.nome + " foi reprovado por média " + media.toFixed(2);
+    } else if (aluno.faltas > 3) {
+        return "O Aluno " + aluno.nome + " foi reprovado por faltas";
     }
 }
 
 /*Teste e consoles
 =================================================================================*/
 let teste = {
-    nome: "Joaoxi",
+    nome: "Joao",
     notas: [],
     cursos: [],
     faltas: 2
@@ -160,6 +190,9 @@ let teste = {
 // console.log(aplicarFalta(teste));
 // console.log(teste);
 
-console.log(alunosDaEscola[3]);
-console.log(aplicarNota(alunosDaEscola[3]));
-console.log(alunosDaEscola[3]);
+// console.log(alunosDaEscola[3]);
+//console.log(aplicarNota(alunosDaEscola[3]));
+// console.log(alunosDaEscola[3]);
+
+// console.log(alunosDaEscola[3]);
+console.log(aprovarAluno(alunosDaEscola[5]));
