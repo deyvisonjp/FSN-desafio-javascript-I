@@ -45,7 +45,8 @@ const alunosDaEscola = [{
 
 // implementação
 
-// Adicionar um novo aluno
+/* Adicionar um novo aluno 
+=================================================================================*/
 function adicionarAluno(nome) {
     alunosDaEscola.push({
         nome,
@@ -56,7 +57,8 @@ function adicionarAluno(nome) {
     return `Aluno ${nome} adicionado com sucesso!`;
 }
 
-//Listar Alunos
+/*Listar Alunos
+=================================================================================*/
 const listarAlunos = () => {
     alunosDaEscola.forEach((aluno, indice) => {
         console.log(
@@ -69,7 +71,8 @@ const listarAlunos = () => {
     })
 }
 
-//Buscar por nome de aluno
+/*Buscar por nome de aluno
+=================================================================================*/
 function buscarAluno(nome) {
     let result = alunosDaEscola.filter((aluno) => {
         return aluno.nome.indexOf(nome) !== -1;
@@ -82,7 +85,8 @@ function buscarAluno(nome) {
     }
 }
 
-//Funçao padrão para pesquisa por nome
+/*Funçao padrão para pesquisa por nome
+=================================================================================*/
 const pesquisa = (pesquisarPor) => {
     let achou = alunosDaEscola.filter(aluno => {
         return aluno.nome.indexOf(pesquisarPor.nome) !== -1;
@@ -91,7 +95,8 @@ const pesquisa = (pesquisarPor) => {
 }
 
 
-//Cadastrar um aluno em um curso
+/*Cadastrar um aluno em um curso
+=================================================================================*/
 function matricularAluno(aluno, curso) {
     let resposta = pesquisa(aluno);
     if (resposta.length >= 1) {
@@ -107,18 +112,37 @@ function matricularAluno(aluno, curso) {
     }
 }
 
-//Funcao Dar falta a aluno
+/*Funcao Dar falta a aluno
+=================================================================================*/
 function aplicarFalta(aluno) {
     let resposta = pesquisa(aluno);
     if (resposta.length >= 1) {
         aluno.faltas++;
-        return `O Aluno ${aluno.nome} faltou!`; 
+        return `O Aluno ${aluno.nome} faltou!`;
     } else {
         return "O Aluno digitado não existe!";
     }
 }
 
+/*Funcao Aplicar Nota
+=================================================================================*/
+function aplicarNota(aluno) {
+    let resposta = pesquisa(aluno);
+    if (resposta.length >= 1) {
+        if (aluno.cursos.length >= 1) {
+            aluno.notas.push(notas = 7);
+            return " Sistema de notas\n" + 
+            "O aluno recebeu a seguinte nota " + "7";
+        } else {
+            return "O aluno não esta matriculado em nenhum curso";
+        } 
+    } else {
+        return "Este Aluno não esta cadastrado no sistema"
+    }
+}
 
+/*Teste e consoles
+=================================================================================*/
 let teste = {
     nome: "Joaoxi",
     notas: [],
@@ -135,3 +159,7 @@ let teste = {
 // console.log(alunosDaEscola[1]);
 // console.log(aplicarFalta(teste));
 // console.log(teste);
+
+console.log(alunosDaEscola[3]);
+console.log(aplicarNota(alunosDaEscola[3]));
+console.log(alunosDaEscola[3]);
